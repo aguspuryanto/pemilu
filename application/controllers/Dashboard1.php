@@ -18,19 +18,15 @@ class Dashboard1 extends CI_Controller
 		}
 
 		/* Data */
-		$loggedIn = $this->session->userdata('logged_in');		
-		$data1 = $this->getQuickCount([
-            'kode'=> $loggedIn[0]['kode']
+		$loggedIn = $this->session->userdata('logged_in');
+		$data1 = $this->getElektabilitas([
+            'kdusr'=> $loggedIn[0]['kode']
         ]);
-		// echo json_encode($data1);
 
-		$qcLabels = array();
-		$qcValues = array();
-		foreach($data1['result_qc'] as $labels) {
-			$qcLabels[] = $labels['nama'];
-			$qcValues[] = $labels['vote'];
-		}
+		$qcLabels = array_keys($data1['result_elektabilitas'][0]);
+		$qcValues = array_values($data1['result_elektabilitas'][0]);
 
+		// Statistik
 		$data2 = $this->getGrafik2([
             'kode'=> $loggedIn[0]['kode']
         ]);
@@ -43,13 +39,12 @@ class Dashboard1 extends CI_Controller
 		}
 
 		$data = array(
-			// 'dataQC' => json_decode($data1, true),
-			// 'dataStat' => ($data2),
 			'qcLabels' => implode("','", $qcLabels),
 			'qcValues' => implode(",", $qcValues),
 			'dataLabels' => implode("','", $dataLabels),
 			'dataValues' => implode(",", $dataValues)
 		);
+		// echo json_encode($data); die();
 
         $this->load->view('dashboard1', $data);
     }
@@ -233,6 +228,10 @@ class Dashboard1 extends CI_Controller
 
 	public function getHasilTimAnggota($data){
 		return getCurl($data, 'hasil_tim_anggota.php');
+	}
+
+	public function getElektabilitas($data){
+		return getCurl($data, 'elektabilitas.php');
 	}
 
 	public function getQuickCount($data){

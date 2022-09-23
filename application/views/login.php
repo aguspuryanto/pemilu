@@ -25,7 +25,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/index2.html"><b>Admin</b>LTE</a>
+      <a href="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/index2.html"><b>Jaring</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -36,7 +36,7 @@
 				} ?>
         <form action="<?=base_url('Auth/login');?>" method="post">
           <div class="input-group mb-3">
-            <input type="number" name="usernm" class="form-control" placeholder="0818336745">
+            <input type="number" name="usernm" class="form-control" placeholder="No HP">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>

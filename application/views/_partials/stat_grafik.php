@@ -1,6 +1,6 @@
 <!-- Main row -->
         <div class="row">
-          <section class="col-lg-12 connectedSortable">
+          <section class="col-lg-5 connectedSortable">
 
             <div class="card card-success">
               <div class="card-header border-0">
@@ -26,13 +26,13 @@
             <!-- /.card -->
 		  </section>
 
-          <section class="col-lg-12 connectedSortable">
+          <section class="col-lg-7 connectedSortable">
             <!-- solid sales graph -->
             <div class="card card-info">
               <div class="card-header border-0">
                 <h3 class="card-title">
                   <i class="fas fa-th mr-1"></i>
-                  Jumlah Vote
+                  Statistik
                 </h3>
 
                 <div class="card-tools">
@@ -57,27 +57,33 @@
 
 			<script>
 			$(document).ready(function() {
+
 				var ctx = document.getElementById('bar-chart').getContext('2d');
 				var myChart = new Chart(ctx, {
-					type: 'horizontalBar',
+					type: 'doughnut',
 					data: {
 						labels: ['<?=$qcLabels;?>'],
 						datasets: [{
-							label: '# of Votes',
+							// label: '# of Tomatoes',
 							data: [<?=$qcValues;?>],
-							backgroundColor: [],
-							borderColor: [],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.5)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)'
+							],
+							borderColor: [
+								'rgba(255,99,132,1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)'
+							],
 							borderWidth: 1
-						}],
+						}]
 					},
 					options: {
-						scales: {
-							yAxes: [{
-								ticks: {
-									beginAtZero: true
-								}
-							}]
-						}
+						//cutoutPercentage: 40,
+						responsive: false,
 					}
 				});
 				
