@@ -34,24 +34,16 @@
                   <i class="fas fa-th mr-1"></i>
                   <?=$title; ?>
                 </h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
               </div>
               <div class="card-body">
 								<table class="table table-striped">
 								<thead>
 									<tr>
 										<th style="width: 10px">#</th>
+										<th></th>
 										<th>Nama</th>
 										<th>Progress</th>
-										<th style="width: 40px">Label</th>
+										<th style="width: 40px;" class="text-center">%</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -59,6 +51,7 @@
 								foreach($dataList['result_qc'] as $item) {
 									echo '<tr>
 										<th scope="row">'.$item['id'].'.</th>
+										<td><img class="img-responsive" src="'.$item['foto'].'"/></td>
 										<td>'.$item['nama'].'</td>
 										<td>
 										<div class="progress progress-xs">

@@ -27,11 +27,11 @@
 		<!-- Main row -->
         <div class="row">
 		<div class="col-12">
-			<div class="card">
+			<div class="card card-info">
 				<div class="card-header">
 					<h3 class="card-title"><?=$title; ?></h3>
 				</div>
-				<div class="card-body table-responsive p-0" style="height: 300px;">
+				<div class="card-body table-responsive p-0" style="height: auto;">
 					<table class="table table-head-fixed text-nowrap">
 						<thead>
 							<tr>
