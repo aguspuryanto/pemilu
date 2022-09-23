@@ -40,7 +40,7 @@
 								<thead>
 									<tr>
 										<th style="width: 10px">#</th>
-										<th></th>
+										<th style="width: 40px;"></th>
 										<th>Nama</th>
 										<th>Progress</th>
 										<th style="width: 40px;" class="text-center">%</th>
@@ -51,11 +51,13 @@
 								foreach($dataList['result_qc'] as $item) {
 									echo '<tr>
 										<th scope="row">'.$item['id'].'.</th>
-										<td><img class="img-responsive" src="'.$item['foto'].'"/></td>
+										<td><div class="media">
+                      <img class="img-circle" style="width:60px;" src="'.endpointUrl() . '/image/' . $item['foto'].'"/>
+                    </div></td>
 										<td>'.$item['nama'].'</td>
 										<td>
 										<div class="progress progress-xs">
-										<div class="progress-bar progress-bar-danger" style="width: '.$item['persen'].'%"></div>
+										<div class="progress-bar progress-bar-danger" role="progressbar" style="width: '.$item['persen'].'%"></div>
 										</div>
 										</td>
 										<td><span class="badge bg-danger">'.$item['persen'].'%</span></td>
