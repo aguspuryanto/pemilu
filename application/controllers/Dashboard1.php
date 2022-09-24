@@ -55,17 +55,35 @@ class Dashboard1 extends CI_Controller
 			redirect('/');
 		}
 
+		// 
+		$get = $this->input->get();
+
 		/* Data */
 		$loggedIn = $this->session->userdata('logged_in');
-		$json = $this->getKonstituenList([
-            'kode'=> $loggedIn[0]['kode'], 
-            'isrekrut'=> 1
-        ]);
+		if($get) {
+			$params = [
+				'kode'=> $loggedIn[0]['kode'], 
+				'filter'=> $get['filterby'],
+				'cari'=> $get['s'],
+				'isrekrut'=> 1
+			];
+
+			$json = $this->getKonstituenSearch($params);
+			// echo json_encode($params) . "<br>";
+			// echo json_encode($json); die();
+		}
+		else {
+			$json = $this->getKonstituenList([
+				'kode'=> $loggedIn[0]['kode'], 
+				'isrekrut'=> 1
+			]);
+		}
 		// echo json_encode($json);
 
 		$data = array(
 			'title' => 'Pendukung',
-			'dataList' => ($json)
+			'dataList' => ($json),
+			'get' => ($get)
 		);
 
         $this->load->view('pendukung', $data);
@@ -248,5 +266,9 @@ class Dashboard1 extends CI_Controller
 
 	public function getKonstituenList($data){
 		return getCurl($data, 'select_konstituen_list.php');
+	}
+
+	public function getKonstituenSearch($data){
+		return getCurl($data, 'search_nik.php');
 	}
 }
