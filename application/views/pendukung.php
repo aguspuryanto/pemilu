@@ -30,12 +30,6 @@
 			<div class="card card-info">
 				<div class="card-header">
 					<h3 class="card-title"><?=$title; ?></h3>
-
-					<div class="card-tools">
-						<button type="button" class="btn bg-success btn-sm" id="export">
-							<i class="fas fa-file-excel"></i>
-						</button>
-					</div>
 				</div>
 				<div class="card-body table-responsive" style="height: auto;">
 					<form method="get" action="<?=base_url('Dashboard1/pendukung');?>">
@@ -43,22 +37,22 @@
 							<label for="staticEmail" class="col-sm-2 col-form-label">Filter Pencarian</label>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="filterby" value="1" <?=($get && $get['filterby']=='1') ? 'checked' : '';?>>
+									<input class="form-check-input" type="radio" name="filterby" value="1" <?=(!empty($get['filterby']) && $get['filterby']=='1') ? 'checked' : '';?>>
 									<label class="form-check-label">NIK</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="filterby" value="2" <?=($get && $get['filterby']=='2') ? 'checked' : '';?>>
+									<input class="form-check-input" type="radio" name="filterby" value="2" <?=(!empty($get['filterby']) && $get['filterby']=='2') ? 'checked' : '';?>>
 									<label class="form-check-label">Nama</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="filterby" value="3" <?=($get && $get['filterby']=='3') ? 'checked' : '';?>>
+									<input class="form-check-input" type="radio" name="filterby" value="3" <?=(!empty($get['filterby']) && $get['filterby']=='3') ? 'checked' : '';?>>
 									<label class="form-check-label">Nohp</label>
 								</div>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div id="example1_filter" class="input-group dataTables_filter">
-								<input type="search" class="form-control" value="<?=($get) ? $get['s'] : '';?>" name="s" id="search" placeholder="Pencarian" aria-controls="example1">
+								<input type="search" class="form-control" value="<?=!empty($get['s']) ? $get['s'] : '';?>" name="s" id="search" placeholder="Pencarian" aria-controls="example1" minlength="3" required>
 								<div class="input-group-append">
 									<button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</div>
@@ -77,7 +71,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php if($dataList) :
+							<?php if(!empty($dataList['result_kons'])) :
 							foreach($dataList['result_kons'] as $item) {
 							echo '<tr>
 								<th scope="row">'.$item['nik'].'</th>
@@ -123,22 +117,26 @@
   <script>
   $(function () {
 	var table = $('#example1').DataTable({
-		"paging": true,
-		"lengthChange": false,
-		"searching": false,
-		"ordering": false,
-		"info": false,
-		"autoWidth": false,
-		"responsive": true,
-		"dom": 'Bfrtip',
-		"buttons": [
-            'csv', 'excel'
-        ],
-		initComplete: function() {
-			$('.buttons-csv').html('<i class="fas fa-file-text-o" />')
-			$('.buttons-excel').html('<i class="fas fa-file-excel" />')
-		}
-    });
+	"paging": false,
+	"lengthChange": false,
+	"searching": false,
+	"ordering": false,
+	"info": false,
+	"autoWidth": false,
+	"responsive": true,
+	dom: 'Bfrtip',
+	buttons: [{
+		extend: 'excelHtml5',
+		title:'Pendukung',
+		messageTop: `
+		Nama Tim: SEMUA
+		Ketua:
+		Keterangan:`,
+	}],
+	initComplete: function() {
+		$('.buttons-html5').html('<i class="fas fa-file-excel" />')
+	}
+	});
 
 	// Fill modal with content from link href
 	$("#exampleModal").on("show.bs.modal", function(e) {
