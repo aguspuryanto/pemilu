@@ -1,6 +1,6 @@
 <!-- Main row -->
         <div class="row">
-          <section class="col-lg-12 connectedSortable">
+          <section class="col-lg-5 connectedSortable">
 
             <div class="card card-success">
               <div class="card-header border-0">
@@ -19,20 +19,52 @@
                 </div>
               </div>
               <div class="card-body">
-                <canvas class="chart" id="bar-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <!-- <canvas class="chart" id="bar-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
+				<?//=json_encode($data1); ?>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td class="bg-warning">
+								<label class="text-center">Jumlah Relawan</label>
+								<div class="text-center">
+									<h1><?=$data1['result_elektabilitas'][0]['totrelawan']; ?></h1>
+								</div>
+							</td>
+							<td rowspan="2" class="align-middle bg-light">
+								<div class="text-center">
+									<h1><span class="badge badge-pill badge-secondary"><?=($data1['result_elektabilitas'][0]['totrekrut']/100) * $data1['result_elektabilitas'][0]['totdpt']; ?>%</span></h1>
+								</div>
+							</td>
+							<td rowspan="2" class="align-middle bg-secondary">
+								<div class="text-center">
+									<span>Target Suara</span>
+									<h1><?=$data1['result_elektabilitas'][0]['targetsuara']; ?></h1>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="bg-info">
+								<label class="text-center">Jumlah Pendukung</label>
+								<div class="text-center">
+									<h1><?=$data1['result_elektabilitas'][0]['totpendukung']; ?></h1>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
 		  </section>
 
-          <section class="col-lg-12 connectedSortable">
+          <section class="col-lg-7 connectedSortable">
             <!-- solid sales graph -->
             <div class="card card-info">
               <div class="card-header border-0">
                 <h3 class="card-title">
                   <i class="fas fa-th mr-1"></i>
-                  Jumlah Vote
+                  Statistik
                 </h3>
 
                 <div class="card-tools">
@@ -56,31 +88,7 @@
 			?>
 
 			<script>
-			$(document).ready(function() {
-				var ctx = document.getElementById('bar-chart').getContext('2d');
-				var myChart = new Chart(ctx, {
-					type: 'horizontalBar',
-					data: {
-						labels: ['<?=$qcLabels;?>'],
-						datasets: [{
-							label: '# of Votes',
-							data: [<?=$qcValues;?>],
-							backgroundColor: [],
-							borderColor: [],
-							borderWidth: 1
-						}],
-					},
-					options: {
-						scales: {
-							yAxes: [{
-								ticks: {
-									beginAtZero: true
-								}
-							}]
-						}
-					}
-				});
-				
+			$(document).ready(function() {				
 				// Sales graph chart
 				var dailyChartCanvas = $('#line-chart').get(0).getContext('2d');
 				//$('#revenue-chart').get(0).getContext('2d');

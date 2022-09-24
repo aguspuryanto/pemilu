@@ -1,10 +1,10 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="<?=base_url('Dashboard1/');?>" class="brand-link">
       <img src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Jaring</span>
     </a>
 
     <!-- Sidebar -->
@@ -49,6 +49,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?=base_url('Dashboard1/petasuara');?>" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                Peta Suara
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?=base_url('Dashboard1/quickcount');?>" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
@@ -60,15 +68,7 @@
             <a href="<?=base_url('Dashboard1/detailqc');?>" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Detail QC
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url('Dashboard1/petasuara');?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Peta Suara
+                Detail Quick Count
               </p>
             </a>
           </li>

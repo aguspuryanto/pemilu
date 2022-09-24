@@ -4,6 +4,10 @@ function endpointUrl(){
 	return 'http://103.82.240.253/disurvey_multi/';
 }
 
+function endpointImage(){
+	return endpointUrl() . '/image/';
+}
+
 function getCurl($data, $end='login_user.php'){
 	$url = endpointUrl() . $end;
 	// echo $url . "<br>";

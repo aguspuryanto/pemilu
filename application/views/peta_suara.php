@@ -39,12 +39,6 @@
                   <button type="button" class="btn bg-success btn-sm" id="export">
                     <i class="fas fa-file-excel"></i>
                   </button>
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
                 </div>
               </div>
               <div class="card-body">

@@ -18,19 +18,15 @@ class Dashboard1 extends CI_Controller
 		}
 
 		/* Data */
-		$loggedIn = $this->session->userdata('logged_in');		
-		$data1 = $this->getQuickCount([
-            'kode'=> $loggedIn[0]['kode']
+		$loggedIn = $this->session->userdata('logged_in');
+		$data1 = $this->getElektabilitas([
+            'kdusr'=> $loggedIn[0]['kode']
         ]);
-		// echo json_encode($data1);
 
-		$qcLabels = array();
-		$qcValues = array();
-		foreach($data1['result_qc'] as $labels) {
-			$qcLabels[] = $labels['nama'];
-			$qcValues[] = $labels['vote'];
-		}
+		$qcLabels = array_keys($data1['result_elektabilitas'][0]);
+		$qcValues = array_values($data1['result_elektabilitas'][0]);
 
+		// Statistik
 		$data2 = $this->getGrafik2([
             'kode'=> $loggedIn[0]['kode']
         ]);
@@ -43,13 +39,13 @@ class Dashboard1 extends CI_Controller
 		}
 
 		$data = array(
-			// 'dataQC' => json_decode($data1, true),
-			// 'dataStat' => ($data2),
+			'data1' => $data1,
 			'qcLabels' => implode("','", $qcLabels),
 			'qcValues' => implode(",", $qcValues),
 			'dataLabels' => implode("','", $dataLabels),
 			'dataValues' => implode(",", $dataValues)
 		);
+		// echo json_encode($data); die();
 
         $this->load->view('dashboard1', $data);
     }
@@ -60,20 +56,72 @@ class Dashboard1 extends CI_Controller
 			redirect('/');
 		}
 
+		// 
+		$get = $this->input->get();
+
 		/* Data */
 		$loggedIn = $this->session->userdata('logged_in');
-		$json = $this->getKonstituenList([
-            'kode'=> $loggedIn[0]['kode'], 
-            'isrekrut'=> 1
-        ]);
+		if($get) {
+			$params = [
+				'kode'=> $loggedIn[0]['kode'], 
+				'filter'=> $get['filterby'],
+				'cari'=> $get['s'],
+				'isrekrut'=> 1
+			];
+
+			$json = $this->getKonstituenSearch($params);
+			// echo json_encode($params) . "<br>";
+			// echo json_encode($json); die();
+		}
+		else {
+			$json = $this->getKonstituenList([
+				'kode'=> $loggedIn[0]['kode'], 
+				'isrekrut'=> 1
+			]);
+		}
 		// echo json_encode($json);
 
 		$data = array(
 			'title' => 'Pendukung',
-			'dataList' => ($json)
+			'dataList' => ($json),
+			'get' => ($get)
 		);
 
         $this->load->view('pendukung', $data);
+	}
+
+	public function pendukungView(){
+		// echo "pendukung";
+		if(!$this->session->has_userdata('logged_in')) {
+			redirect('/');
+		}
+
+		// 
+		$get = $this->input->get();
+
+		/* Data */
+		$loggedIn = $this->session->userdata('logged_in');
+		if($get) {
+			$params = [
+				'kode'=> $loggedIn[0]['kode'], 
+				'filter'=> 1, //NIK
+				'cari'=> $get['nik'],
+				'isrekrut'=> 1
+			];
+
+			$json = $this->getKonstituenSearch($params);
+			// echo json_encode($params) . "<br>";
+			// echo json_encode($json);
+
+			$data = array(
+				'title' => 'Pendukung',
+				'dataList' => ($json),
+				'get' => ($get)
+			);
+
+			$this->load->view('pendukung_detail', $data);
+			
+		}
 	}
 
 	public function hasilTim($kode=""){
@@ -235,6 +283,10 @@ class Dashboard1 extends CI_Controller
 		return getCurl($data, 'hasil_tim_anggota.php');
 	}
 
+	public function getElektabilitas($data){
+		return getCurl($data, 'elektabilitas.php');
+	}
+
 	public function getQuickCount($data){
 		return getCurl($data, 'select_qc.php');
 	}
@@ -249,5 +301,9 @@ class Dashboard1 extends CI_Controller
 
 	public function getKonstituenList($data){
 		return getCurl($data, 'select_konstituen_list.php');
+	}
+
+	public function getKonstituenSearch($data){
+		return getCurl($data, 'search_nik.php');
 	}
 }

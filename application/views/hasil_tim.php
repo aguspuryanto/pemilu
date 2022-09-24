@@ -34,37 +34,30 @@
                   <i class="fas fa-th mr-1"></i>
                   <?=$title; ?>
                 </h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
               </div>
               <div class="card-body">
-			  <table class="table table-striped">
-				<thead>
-					<tr>
-						<th style="width: 10px">#</th>
-						<th>Nama</th>
-						<th style="width: 40px">Pendukung</th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php if($dataList && $dataList['success']==1) :
-					foreach($dataList['result_hasil_tim'] as $item) {
-						echo '<tr>
-							<th scope="row"><a href="'.base_url('Dashboard1/hasiltim/' . $item['kode']).'">'.$item['kode'].'</a></th>
-							<td>'.$item['nama'].'</td>
-							<td>'.$item['konstituen'].'</td>
-						</tr>';
-					}
-				endif; ?>
-				</tbody>
-				</table>
+                <table id="example1" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">No</th>
+                    <th>Nama</th>
+                    <th style="width: 40px">Pendukung</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php if($dataList && $dataList['success']==1) :
+                  $x=1;
+                  foreach($dataList['result_hasil_tim'] as $item) {
+                    echo '<tr>
+                      <th scope="row"><a href="'.base_url('Dashboard1/hasiltim/' . $item['kode']).'">'.$x.'.</a></th>
+                      <td>'.$item['nama'].'</td>
+                      <td>'.$item['konstituen'].'</td>
+                    </tr>';
+                    $x++;
+                  }
+                endif; ?>
+                </tbody>
+                </table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -77,5 +70,34 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <script>
+    $(function () {
+      var table = $('#example1').DataTable({
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+        dom: 'Bfrtip',
+        buttons: [{
+          extend: 'excelHtml5',
+          exportOptions: {
+          trim: false,
+            stripHtml: false,
+            format: {
+              header: function ( html, index, node ) {
+                return index + ' [' + html +']';
+              }
+            }
+          }
+        }],
+        initComplete: function() {
+          $('.buttons-html5').html('<i class="fas fa-file-excel" />')
+        }
+      });
+    });
+  </script>
 
 <?php include_once('_partials/footer.php'); ?>

@@ -39,45 +39,39 @@
                   <button type="button" class="btn bg-success btn-sm" id="export">
                     <i class="fas fa-file-excel"></i>
                   </button>
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-success btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
                 </div>
               </div>
               <div class="card-body">
-								<table class="table table-striped">
-								<thead>
-									<tr>
-										<th style="width: 10px">No</th>
-										<th><?=$header_title; ?></th>
-										<th>Relawan</th>
-										<th>Pendukung</th>
-										<th>Total</th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php if($dataList) :
-								$x=1;
-								foreach($dataList['result_qc_hasil'] as $item) {
-									$linkUrl = ($filter=="5") ? "#": base_url('Dashboard1/detailqc/?filter=' . ($filter) . '&kd_filter='. ($item['kd_kel']));
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th style="width: 10px">No</th>
+							<th><?=$header_title; ?></th>
+							<th>01</th>
+							<th>02</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php if($dataList) :
+					$x=1;
+					foreach($dataList['result_qc_hasil'] as $item) {
+						$linkUrl = ($filter=="5") ? "#": base_url('Dashboard1/detailqc/?filter=' . ($filter) . '&kd_filter='. ($item['kd_kel']));
 
-									$item['nama'] = ($filter=="5") ? $item['nama'] : '<a href="'.$linkUrl.'">'.$item['nama'].'</a>';
+						$item['nama'] = ($filter=="5") ? $item['nama'] : '<a href="'.$linkUrl.'">'.$item['nama'].'</a>';
 
-									echo '<tr>
-										<th scope="row">'.$x.'.</th>
-										<td>'.$item['nama'].'</td>
-										<td>'.$item['k_1'].'</td>
-										<td>'.$item['k_2'].'</td>
-										<td>'.$item['k_3'].'</td>
-									</tr>';
-									$x++;
-								}
-								endif; ?>
-								</tbody>
-								</table>
+						echo '<tr>
+							<th scope="row">'.$x.'.</th>
+							<td>'.$item['nama'].'</td>
+							<td>'.$item['k_1'].'</td>
+							<td>'.$item['k_2'].'</td>
+							<td>'.$item['k_3'].'</td>
+						</tr>';
+						$x++;
+					}
+					endif; ?>
+					</tbody>
+				</table>
               </div>
               <!-- /.card-body -->
             </div>
