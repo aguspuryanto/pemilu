@@ -32,7 +32,7 @@
 							</td>
 							<td rowspan="2" class="align-middle bg-light">
 								<div class="text-center">
-									<h1><span class="badge badge-pill badge-secondary"><?=($data1['result_elektabilitas'][0]['totrekrut']/100) * $data1['result_elektabilitas'][0]['totdpt']; ?>%</span></h1>
+									<h1><span class="badge badge-pill badge-secondary"><?=number_format(($data1['result_elektabilitas'][0]['totrekrut']/$data1['result_elektabilitas'][0]['targetsuara']) * 100, 2); ?>%</span></h1>
 								</div>
 							</td>
 							<td rowspan="2" class="align-middle bg-secondary">
