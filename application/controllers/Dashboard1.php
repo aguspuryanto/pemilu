@@ -64,8 +64,8 @@ class Dashboard1 extends CI_Controller
 		if($get) {
 			$params = [
 				'kode'=> $loggedIn[0]['kode'], 
-				'filter'=> $get['filterby'],
-				'cari'=> $get['s'],
+				'filter'=> (!empty($get['filterby'])) ? (int)$get['filterby'] : 1,
+				'cari'=> (!empty($get['s'])) ? $get['s'] : '',
 				'isrekrut'=> 1
 			];
 
