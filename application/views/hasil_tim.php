@@ -83,15 +83,11 @@
         dom: 'Bfrtip',
         buttons: [{
           extend: 'excelHtml5',
-          exportOptions: {
-          trim: false,
-            stripHtml: false,
-            format: {
-              header: function ( html, index, node ) {
-                return index + ' [' + html +']';
-              }
-            }
-          }
+          title:'Hasil Perekrutan',
+          messageTop: `
+          Nama Tim: SEMUA
+          Ketua:
+          Keterangan:`,
         }],
         initComplete: function() {
           $('.buttons-html5').html('<i class="fas fa-file-excel" />')
