@@ -52,7 +52,7 @@
 									echo '<tr>
 										<th scope="row">'.$item['id'].'.</th>
 										<td><div class="media">
-                      <img class="img-circle" style="width:60px;" src="'.endpointUrl() . '/image/' . $item['foto'].'"/>
+                      <img class="img-circle" style="width:60px;" src="'.endpointImage() . $item['foto'].'"/>
                     </div></td>
 										<td>'.$item['nama'].'</td>
 										<td>

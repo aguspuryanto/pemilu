@@ -30,6 +30,12 @@
 			<div class="card card-info">
 				<div class="card-header">
 					<h3 class="card-title"><?=$title; ?></h3>
+
+					<div class="card-tools">
+						<button type="button" class="btn bg-success btn-sm" id="export">
+							<i class="fas fa-file-excel"></i>
+						</button>
+					</div>
 				</div>
 				<div class="card-body table-responsive" style="height: auto;">
 					<form method="get" action="<?=base_url('Dashboard1/pendukung');?>">
@@ -79,7 +85,9 @@
 								<td>'.$item['alamat'].'</td>
 								<td>'.$item['kota'].'</td>
 								<td>'.$item['tps'].'</td>
-								<td>#</td>
+								<th scope="col">
+									<a href="'.base_url('Dashboard1/pendukungview?nik=' . $item['nik']).'" data-remote="false" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye" aria-hidden="true"></i></a>
+								</th>
 							</tr>';
 							}
 							endif; ?>
@@ -96,17 +104,47 @@
   </div>
   <!-- /.content-wrapper -->
 
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Konstituen Detail</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body p-0">
+				
+			</div>
+		</div>
+	</div>
+	</div>
+
   <script>
   $(function () {
 	var table = $('#example1').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": false,
-      "info": false,
-      "autoWidth": false,
-      "responsive": true,
+		"paging": true,
+		"lengthChange": false,
+		"searching": false,
+		"ordering": false,
+		"info": false,
+		"autoWidth": false,
+		"responsive": true,
+		"dom": 'Bfrtip',
+		"buttons": [
+            'csv', 'excel'
+        ],
+		initComplete: function() {
+			$('.buttons-csv').html('<i class="fas fa-file-text-o" />')
+			$('.buttons-excel').html('<i class="fas fa-file-excel" />')
+		}
     });
+
+	// Fill modal with content from link href
+	$("#exampleModal").on("show.bs.modal", function(e) {
+		var link = $(e.relatedTarget);
+		$(this).find(".modal-body").load(link.attr("href"));
+	});
   });
   </script>
 

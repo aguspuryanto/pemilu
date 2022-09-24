@@ -89,6 +89,40 @@ class Dashboard1 extends CI_Controller
         $this->load->view('pendukung', $data);
 	}
 
+	public function pendukungView(){
+		// echo "pendukung";
+		if(!$this->session->has_userdata('logged_in')) {
+			redirect('/');
+		}
+
+		// 
+		$get = $this->input->get();
+
+		/* Data */
+		$loggedIn = $this->session->userdata('logged_in');
+		if($get) {
+			$params = [
+				'kode'=> $loggedIn[0]['kode'], 
+				'filter'=> 1, //NIK
+				'cari'=> $get['nik'],
+				'isrekrut'=> 1
+			];
+
+			$json = $this->getKonstituenSearch($params);
+			// echo json_encode($params) . "<br>";
+			// echo json_encode($json);
+
+			$data = array(
+				'title' => 'Pendukung',
+				'dataList' => ($json),
+				'get' => ($get)
+			);
+
+			$this->load->view('pendukung_detail', $data);
+			
+		}
+	}
+
 	public function hasilTim($kode=""){
 		// 
 		// echo $kode;
