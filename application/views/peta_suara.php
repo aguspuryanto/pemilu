@@ -36,13 +36,13 @@
                 </h3>
 
                 <div class="card-tools">
-                  <button type="button" class="btn bg-success btn-sm" id="export">
+                  <!-- <button type="button" class="btn bg-success btn-sm" id="export">
                     <i class="fas fa-file-excel"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <div class="card-body">
-								<table class="table table-striped">
+								<table id="example1" class="table table-striped">
 								<thead>
 									<tr>
 										<th style="width: 10px">#</th>
@@ -86,38 +86,31 @@
   </div>
   <!-- /.content-wrapper -->
 
-	<script>
-		$(document).ready(function() {
-			$('#export').click(function() {
-				var titles = [];
-				var data = [];
-				
-				$('.table tr').each(function() {
-					data.push($(this));
-				});
-
-				csv_data = []
-
-				data.forEach(function(item,index){
-					td = item[0].children
-					for(i=0;i<td.length;i++){
-					
-						csv_data.push(td[i].innerText)
-					}
-				
-					csv_data.push('\r\n')
-				})
-
-				var downloadLink = document.createElement("a");
-				var blob = new Blob(["\ufeff", csv_data]);
-				var url = URL.createObjectURL(blob);
-				downloadLink.href = url;
-				downloadLink.download = "peta_suara.csv";
-				document.body.appendChild(downloadLink);
-				downloadLink.click();
-				document.body.removeChild(downloadLink);
-			});
-		});
-	</script>
+	
+  <script>
+    $(function () {
+      var table = $('#example1').DataTable({
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+        dom: 'Bfrtip',
+        buttons: [{
+          extend: 'excelHtml5',
+          title:'Peta Suara',
+          messageTop: `
+          Nama Tim: SEMUA
+          Ketua:
+          Keterangan:`,
+        }],
+        initComplete: function() {
+          $('.buttons-html5').html('<i class="fas fa-file-excel" />')
+        }
+      });
+    });
+  </script>
 
 <?php include_once('_partials/footer.php'); ?>
