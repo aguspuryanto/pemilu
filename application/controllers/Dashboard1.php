@@ -39,6 +39,7 @@ class Dashboard1 extends CI_Controller
 		}
 
 		$data = array(
+			'data1' => $data1,
 			'qcLabels' => implode("','", $qcLabels),
 			'qcValues' => implode(",", $qcValues),
 			'dataLabels' => implode("','", $dataLabels),

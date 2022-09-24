@@ -19,7 +19,39 @@
                 </div>
               </div>
               <div class="card-body">
-                <canvas class="chart" id="bar-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <!-- <canvas class="chart" id="bar-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
+				<?//=json_encode($data1); ?>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td class="bg-warning">
+								<label class="text-center">Jumlah Relawan</label>
+								<div class="text-center">
+									<h1><?=$data1['result_elektabilitas'][0]['totrelawan']; ?></h1>
+								</div>
+							</td>
+							<td rowspan="2" class="align-middle bg-light">
+								<div class="text-center">
+									<h1><span class="badge badge-pill badge-secondary"><?=($data1['result_elektabilitas'][0]['totrekrut']/100) * $data1['result_elektabilitas'][0]['totdpt']; ?>%</span></h1>
+								</div>
+							</td>
+							<td rowspan="2" class="align-middle bg-secondary">
+								<div class="text-center">
+									<span>Target Suara</span>
+									<h1><?=$data1['result_elektabilitas'][0]['targetsuara']; ?></h1>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="bg-info">
+								<label class="text-center">Jumlah Pendukung</label>
+								<div class="text-center">
+									<h1><?=$data1['result_elektabilitas'][0]['totpendukung']; ?></h1>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -56,37 +88,7 @@
 			?>
 
 			<script>
-			$(document).ready(function() {
-
-				var ctx = document.getElementById('bar-chart').getContext('2d');
-				var myChart = new Chart(ctx, {
-					type: 'doughnut',
-					data: {
-						labels: ['<?=$qcLabels;?>'],
-						datasets: [{
-							// label: '# of Tomatoes',
-							data: [<?=$qcValues;?>],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.5)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)'
-							],
-							borderColor: [
-								'rgba(255,99,132,1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)'
-							],
-							borderWidth: 1
-						}]
-					},
-					options: {
-						//cutoutPercentage: 40,
-						responsive: false,
-					}
-				});
-				
+			$(document).ready(function() {				
 				// Sales graph chart
 				var dailyChartCanvas = $('#line-chart').get(0).getContext('2d');
 				//$('#revenue-chart').get(0).getContext('2d');
