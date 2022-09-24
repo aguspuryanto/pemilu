@@ -36,13 +36,13 @@
                 </h3>
 
                 <div class="card-tools">
-                  <button type="button" class="btn bg-success btn-sm" id="export">
+                  <!-- <button type="button" class="btn bg-success btn-sm" id="export">
                     <i class="fas fa-file-excel"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <div class="card-body">
-				<table class="table table-striped">
+				<table id="example1" class="table table-striped">
 					<thead>
 						<tr>
 							<th style="width: 10px">No</th>
