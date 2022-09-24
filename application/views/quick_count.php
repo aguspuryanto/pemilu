@@ -39,7 +39,7 @@
 								<table class="table table-striped">
 								<thead>
 									<tr>
-										<th style="width: 10px">#</th>
+										<th style="width: 10px">No</th>
 										<th style="width: 40px;"></th>
 										<th>Nama</th>
 										<th>Progress</th>
@@ -48,9 +48,10 @@
 								</thead>
 								<tbody>
 								<?php if($dataList) :
+                $x=1;
 								foreach($dataList['result_qc'] as $item) {
 									echo '<tr>
-										<th scope="row">'.$item['id'].'.</th>
+										<th scope="row">'.$x.'.</th>
 										<td><div class="media">
                       <img class="img-circle" style="width:60px;" src="'.endpointImage() . $item['foto'].'"/>
                     </div></td>
@@ -62,6 +63,7 @@
 										</td>
 										<td><span class="badge bg-danger">'.$item['persen'].'%</span></td>
 									</tr>';
+                  $x++;
 								}
 								endif; ?>
 								</tbody>
