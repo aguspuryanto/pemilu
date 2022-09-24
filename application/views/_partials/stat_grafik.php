@@ -18,7 +18,7 @@
                   </button>
                 </div>
               </div>
-              <div class="card-body">
+              <div id="loadprogress" class="card-body">
                 <!-- <canvas class="chart" id="bar-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
 				<?//=json_encode($data1); ?>
 				<table class="table">
@@ -149,6 +149,11 @@
 					data: dailyChartData, 
 					options: dailyChartOptions
 				})
+
+				var auto_refresh = setInterval(function ()
+				{
+					$('#loadprogress').load('<?=base_url('Dashboard1/loadprogress');?>').fadeIn("slow");
+				}, 60000); // refresh every 1 minute
 
 			});
 			</script>

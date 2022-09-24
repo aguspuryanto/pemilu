@@ -247,6 +247,26 @@ class Dashboard1 extends CI_Controller
 		redirect('/');
 	}
 
+	public function loadProgress(){
+		if(!$this->session->has_userdata('logged_in')) {
+			redirect('/');
+		}
+
+		/* Data */
+		$loggedIn = $this->session->userdata('logged_in');
+		$data1 = $this->getElektabilitas([
+            'kdusr'=> $loggedIn[0]['kode']
+        ]);
+
+		$data = array(
+			'data1' => $data1,
+		);
+		// echo json_encode($data); die();
+
+        $this->load->view('_partials/stat_grafik_ajax', $data);
+
+	}
+
 	/* Helper Function
 	 * --
 	 */
