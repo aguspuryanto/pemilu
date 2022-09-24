@@ -267,6 +267,35 @@ class Dashboard1 extends CI_Controller
 
 	}
 
+	public function loadProgressGrafik(){
+		if(!$this->session->has_userdata('logged_in')) {
+			redirect('/');
+		}
+
+		/* Data */
+		$loggedIn = $this->session->userdata('logged_in');
+		// Statistik
+		$data2 = $this->getGrafik2([
+            'kode'=> $loggedIn[0]['kode']
+        ]);
+
+		$dataLabels = array();
+		$dataValues = array();
+		foreach($data2['result_stat'] as $labels) {
+			$dataLabels[] = $labels['tgl'];
+			$dataValues[] = $labels['jml'];
+		}
+
+		$data = array(
+			'dataLabels' => $dataLabels,
+			'dataValues' => $dataValues
+		);
+		echo json_encode($data);
+
+        // $this->load->view('_partials/stat_grafik_ajax', $data);
+
+	}
+
 	/* Helper Function
 	 * --
 	 */
