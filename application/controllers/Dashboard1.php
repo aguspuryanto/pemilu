@@ -242,6 +242,11 @@ class Dashboard1 extends CI_Controller
         $this->load->view('peta_suara', $data);
 	}
 
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('/');
+	}
+
 	/* Helper Function
 	 * --
 	 */

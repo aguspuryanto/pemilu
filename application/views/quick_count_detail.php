@@ -47,8 +47,9 @@
 						<tr>
 							<th style="width: 10px">No</th>
 							<th><?=$header_title; ?></th>
-							<th>01</th>
-							<th>02</th>
+							<?php for($i=1;$i<=$dataList['result_qc_hasil'][0]['jml_kons']; $i++) {?>
+							<th><?=str_pad($i,2,"0", STR_PAD_LEFT); ?></th>
+							<?php } ?>
 							<th>Total</th>
 						</tr>
 					</thead>
@@ -62,10 +63,16 @@
 
 						echo '<tr>
 							<th scope="row">'.$x.'.</th>
-							<td>'.$item['nama'].'</td>
-							<td>'.$item['k_1'].'</td>
-							<td>'.$item['k_2'].'</td>
-							<td>'.$item['k_3'].'</td>
+							<td>'.$item['nama'].'</td>';
+
+							$totk = 0;
+							for($i=1;$i<=$item['jml_kons']; $i++) {
+								$field = 'k_'.$i;
+								echo '<td>'.$item[$field].'</td>';
+								$totk += $item[$field];
+							}
+
+						echo '<td>'.$totk.'</td>
 						</tr>';
 						$x++;
 					}
