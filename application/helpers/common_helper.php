@@ -5,7 +5,7 @@ function endpointUrl(){
 }
 
 function endpointImage(){
-	return endpointUrl() . '/image/';
+	return endpointUrl() . '/disurvey_konstituen/';
 }
 
 function getCurl($data, $end='login_user.php'){
