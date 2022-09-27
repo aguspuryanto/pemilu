@@ -49,7 +49,7 @@
     </tr>
     <tr>
       <th scope="row">Status</th>
-      <td colspan="3"><?=($item['isrelawan']==1) ? 'Relawan' : '--'; ?></td>
+      <td colspan="3"><?=($item['isrelawan']==1) ? 'Relawan' : 'Pendukung'; ?></td>
     </tr>
     <tr>
       <th scope="row">KTP</th>
